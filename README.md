@@ -10,10 +10,11 @@ Escrow-as-a-service frontend built with React, TanStack Router, Tailwind CSS v4,
 - React Hook Form + Zod
 - Motion (auth panel micro-interactions)
 
-## Auth routes
+## Routes
 
 | Path | Screen |
 | --- | --- |
+| `/` | Marketing landing page |
 | `/login` | Sign in (email + Google CTA) |
 | `/signup` | Create account |
 | `/verify` | Email verification OTP |
