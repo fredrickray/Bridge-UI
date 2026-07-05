@@ -43,7 +43,7 @@ export function HowItWorks() {
             Three steps. Funds stay controlled the whole way.
           </motion.h2>
           <motion.p variants={fadeUp} className="text-base text-muted-foreground text-pretty">
-            Relay turns handshakes into a clear path: deposit, deliver, inspect, release.
+            Bridge turns handshakes into a clear path: deposit, deliver, inspect, release.
           </motion.p>
         </motion.div>
 

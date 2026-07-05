@@ -26,7 +26,7 @@ export function AuthLayout({ title, description, children, footer }: AuthLayoutP
             <span className="size-2 rounded-full bg-primary" />
           </span>
           <Link to="/login" className="font-serif text-xl text-foreground">
-            Relay
+            Bridge
           </Link>
         </div>
 

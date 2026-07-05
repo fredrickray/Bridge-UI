@@ -51,7 +51,7 @@ function LoginPage() {
       description="Access your escrow agreements, milestones, and releases."
       footer={
         <p className="text-center text-sm text-muted-foreground">
-          New to Relay?{' '}
+          New to Bridge?{' '}
           <Link
             to="/signup"
             className="font-medium text-foreground underline-offset-4 hover:underline"

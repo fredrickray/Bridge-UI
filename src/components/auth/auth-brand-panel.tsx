@@ -38,7 +38,7 @@ export function AuthBrandPanel() {
           <span className="flex size-9 items-center justify-center rounded-lg bg-signal/20 ring-1 ring-signal/40">
             <span className="size-2.5 rounded-full bg-signal shadow-[0_0_12px_oklch(0.72_0.12_170)]" />
           </span>
-          <span className="font-serif text-2xl tracking-tight">Relay</span>
+          <span className="font-serif text-2xl tracking-tight">Bridge</span>
         </div>
 
         <div className="flex max-w-md flex-col gap-8 py-10">

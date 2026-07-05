@@ -31,7 +31,7 @@ export function LandingNav() {
           <span className="flex size-8 items-center justify-center rounded-lg bg-signal/20 ring-1 ring-signal/35">
             <span className="size-2 rounded-full bg-signal" />
           </span>
-          <span className="font-serif text-xl tracking-tight">Relay</span>
+          <span className="font-serif text-xl tracking-tight">Bridge</span>
         </Link>
 
         <nav className="flex items-center gap-2 sm:gap-3">

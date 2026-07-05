@@ -26,7 +26,7 @@ function WorkspacePage() {
     <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col gap-8 px-6 py-12">
       <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-1">
-          <p className="font-serif text-2xl">Relay</p>
+          <p className="font-serif text-2xl">Bridge</p>
           <h1 className="font-heading text-2xl font-medium tracking-tight">
             Welcome{user?.fullName ? `, ${user.fullName}` : ''}
           </h1>

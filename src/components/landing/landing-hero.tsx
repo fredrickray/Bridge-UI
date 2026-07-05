@@ -24,7 +24,7 @@ export function LandingHero() {
             variants={fadeUp}
             className="font-serif text-5xl tracking-tight text-harbor-foreground sm:text-6xl lg:text-7xl"
           >
-            Relay
+            Bridge
           </motion.p>
 
           <motion.h1

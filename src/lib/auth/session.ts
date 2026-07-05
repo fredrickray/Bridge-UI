@@ -1,5 +1,5 @@
-const AUTH_KEY = 'relay.auth'
-const PENDING_KEY = 'relay.pending-verification'
+const AUTH_KEY = 'bridge.auth'
+const PENDING_KEY = 'bridge.pending-verification'
 
 export type AuthUser = {
   id: string
@@ -81,13 +81,13 @@ export async function verifyEmailCode(code: string) {
 
 export async function requestPasswordReset(email: string) {
   await delay()
-  writeJson('relay.reset-email', { email })
+  writeJson('bridge.reset-email', { email })
   return { email }
 }
 
 export async function resetPassword(_password: string) {
   await delay()
-  localStorage.removeItem('relay.reset-email')
+  localStorage.removeItem('bridge.reset-email')
   return { ok: true }
 }
 
