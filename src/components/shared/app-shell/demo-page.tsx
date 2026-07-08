@@ -125,10 +125,7 @@ const DEMO_ROWS: Record<
     },
     { title: 'Milestone 2 — Brand', meta: 'Awaiting payer', status: 'Held' },
   ],
-  settings: [
-    { title: 'Workspace', meta: 'Bridge demo', status: 'Active' },
-    { title: 'Notifications', meta: 'Email + in-app', status: 'On' },
-  ],
+  settings: [],
 }
 
 export function AppDemoPage() {
