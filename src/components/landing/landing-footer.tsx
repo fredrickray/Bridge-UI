@@ -8,7 +8,7 @@ export function LandingFooter() {
           <span className="flex size-7 items-center justify-center rounded-md bg-primary/15">
             <span className="size-1.5 rounded-full bg-primary" />
           </span>
-          <span className="font-serif text-lg">Relay</span>
+          <span className="font-serif text-lg">Bridge</span>
         </div>
         <p className="text-sm text-muted-foreground">
           Escrow as a service — hold funds until the work clears.

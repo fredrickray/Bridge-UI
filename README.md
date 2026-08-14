@@ -1,4 +1,4 @@
-# Relay (Bridge UI)
+# Bridge
 
 Escrow-as-a-service frontend built with React, TanStack Router, Tailwind CSS v4, and shadcn/ui.
 

@@ -58,7 +58,7 @@ function SignupPage() {
   return (
     <AuthLayout
       title="Create your account"
-      description="Set up Relay to create agreements, fund milestones, and release with confidence."
+      description="Set up Bridge to create agreements, fund milestones, and release with confidence."
       footer={
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{' '}
