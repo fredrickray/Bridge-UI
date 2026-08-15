@@ -9,7 +9,8 @@ import { AuthLayout } from '@/components/auth/auth-layout'
 import { PasswordInput } from '@/components/auth/password-input'
 import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { resetPasswordSchema, type ResetPasswordValues } from '@/lib/auth/schemas'
+import { resetPasswordSchema  } from '@/lib/auth/schemas'
+import type {ResetPasswordValues} from '@/lib/auth/schemas';
 import { resetPassword } from '@/lib/auth/session'
 
 export const Route = createFileRoute('/reset-password')({

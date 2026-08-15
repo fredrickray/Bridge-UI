@@ -16,6 +16,14 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
+import { Route as appLayoutRouteRouteImport } from './routes/(app)/_layout/route'
+import { Route as appLayoutPageRouteImport } from './routes/(app)/_layout/$page'
+import { Route as appLayoutWizardRouteImport } from './routes/(app)/_layout/wizard'
+import { Route as appLayoutWizardIndexRouteImport } from './routes/(app)/_layout/wizard/index'
+import { Route as appLayoutWizardFocusRouteImport } from './routes/(app)/_layout/wizard/focus'
+import { Route as appLayoutWizardPreviewRouteImport } from './routes/(app)/_layout/wizard/preview'
+import { Route as appLayoutWizardRailRouteImport } from './routes/(app)/_layout/wizard/rail'
+import { Route as appLayoutWizardStepperRouteImport } from './routes/(app)/_layout/wizard/stepper'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +60,45 @@ const WorkspaceRoute = WorkspaceRouteImport.update({
   path: '/workspace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appLayoutRouteRoute = appLayoutRouteRouteImport.update({
+  id: '/(app)/_layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appLayoutPageRoute = appLayoutPageRouteImport.update({
+  id: '/$page',
+  path: '/$page',
+  getParentRoute: () => appLayoutRouteRoute,
+} as any)
+const appLayoutWizardRoute = appLayoutWizardRouteImport.update({
+  id: '/wizard',
+  path: '/wizard',
+  getParentRoute: () => appLayoutRouteRoute,
+} as any)
+const appLayoutWizardIndexRoute = appLayoutWizardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => appLayoutWizardRoute,
+} as any)
+const appLayoutWizardFocusRoute = appLayoutWizardFocusRouteImport.update({
+  id: '/focus',
+  path: '/focus',
+  getParentRoute: () => appLayoutWizardRoute,
+} as any)
+const appLayoutWizardPreviewRoute = appLayoutWizardPreviewRouteImport.update({
+  id: '/preview',
+  path: '/preview',
+  getParentRoute: () => appLayoutWizardRoute,
+} as any)
+const appLayoutWizardRailRoute = appLayoutWizardRailRouteImport.update({
+  id: '/rail',
+  path: '/rail',
+  getParentRoute: () => appLayoutWizardRoute,
+} as any)
+const appLayoutWizardStepperRoute = appLayoutWizardStepperRouteImport.update({
+  id: '/stepper',
+  path: '/stepper',
+  getParentRoute: () => appLayoutWizardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +108,13 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/workspace': typeof WorkspaceRoute
+  '/$page': typeof appLayoutPageRoute
+  '/wizard': typeof appLayoutWizardRouteWithChildren
+  '/wizard/focus': typeof appLayoutWizardFocusRoute
+  '/wizard/preview': typeof appLayoutWizardPreviewRoute
+  '/wizard/rail': typeof appLayoutWizardRailRoute
+  '/wizard/stepper': typeof appLayoutWizardStepperRoute
+  '/wizard/': typeof appLayoutWizardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +124,12 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/workspace': typeof WorkspaceRoute
+  '/$page': typeof appLayoutPageRoute
+  '/wizard/focus': typeof appLayoutWizardFocusRoute
+  '/wizard/preview': typeof appLayoutWizardPreviewRoute
+  '/wizard/rail': typeof appLayoutWizardRailRoute
+  '/wizard/stepper': typeof appLayoutWizardStepperRoute
+  '/wizard': typeof appLayoutWizardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +140,14 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/workspace': typeof WorkspaceRoute
+  '/(app)/_layout': typeof appLayoutRouteRouteWithChildren
+  '/(app)/_layout/$page': typeof appLayoutPageRoute
+  '/(app)/_layout/wizard': typeof appLayoutWizardRouteWithChildren
+  '/(app)/_layout/wizard/focus': typeof appLayoutWizardFocusRoute
+  '/(app)/_layout/wizard/preview': typeof appLayoutWizardPreviewRoute
+  '/(app)/_layout/wizard/rail': typeof appLayoutWizardRailRoute
+  '/(app)/_layout/wizard/stepper': typeof appLayoutWizardStepperRoute
+  '/(app)/_layout/wizard/': typeof appLayoutWizardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +159,13 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/workspace'
+    | '/$page'
+    | '/wizard'
+    | '/wizard/focus'
+    | '/wizard/preview'
+    | '/wizard/rail'
+    | '/wizard/stepper'
+    | '/wizard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +175,12 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/workspace'
+    | '/$page'
+    | '/wizard/focus'
+    | '/wizard/preview'
+    | '/wizard/rail'
+    | '/wizard/stepper'
+    | '/wizard'
   id:
     | '__root__'
     | '/'
@@ -109,6 +190,14 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/workspace'
+    | '/(app)/_layout'
+    | '/(app)/_layout/$page'
+    | '/(app)/_layout/wizard'
+    | '/(app)/_layout/wizard/focus'
+    | '/(app)/_layout/wizard/preview'
+    | '/(app)/_layout/wizard/rail'
+    | '/(app)/_layout/wizard/stepper'
+    | '/(app)/_layout/wizard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +208,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
   WorkspaceRoute: typeof WorkspaceRoute
+  appLayoutRouteRoute: typeof appLayoutRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -172,8 +262,98 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkspaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/_layout': {
+      id: '/(app)/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appLayoutRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/_layout/$page': {
+      id: '/(app)/_layout/$page'
+      path: '/$page'
+      fullPath: '/$page'
+      preLoaderRoute: typeof appLayoutPageRouteImport
+      parentRoute: typeof appLayoutRouteRoute
+    }
+    '/(app)/_layout/wizard': {
+      id: '/(app)/_layout/wizard'
+      path: '/wizard'
+      fullPath: '/wizard'
+      preLoaderRoute: typeof appLayoutWizardRouteImport
+      parentRoute: typeof appLayoutRouteRoute
+    }
+    '/(app)/_layout/wizard/': {
+      id: '/(app)/_layout/wizard/'
+      path: '/'
+      fullPath: '/wizard/'
+      preLoaderRoute: typeof appLayoutWizardIndexRouteImport
+      parentRoute: typeof appLayoutWizardRoute
+    }
+    '/(app)/_layout/wizard/focus': {
+      id: '/(app)/_layout/wizard/focus'
+      path: '/focus'
+      fullPath: '/wizard/focus'
+      preLoaderRoute: typeof appLayoutWizardFocusRouteImport
+      parentRoute: typeof appLayoutWizardRoute
+    }
+    '/(app)/_layout/wizard/preview': {
+      id: '/(app)/_layout/wizard/preview'
+      path: '/preview'
+      fullPath: '/wizard/preview'
+      preLoaderRoute: typeof appLayoutWizardPreviewRouteImport
+      parentRoute: typeof appLayoutWizardRoute
+    }
+    '/(app)/_layout/wizard/rail': {
+      id: '/(app)/_layout/wizard/rail'
+      path: '/rail'
+      fullPath: '/wizard/rail'
+      preLoaderRoute: typeof appLayoutWizardRailRouteImport
+      parentRoute: typeof appLayoutWizardRoute
+    }
+    '/(app)/_layout/wizard/stepper': {
+      id: '/(app)/_layout/wizard/stepper'
+      path: '/stepper'
+      fullPath: '/wizard/stepper'
+      preLoaderRoute: typeof appLayoutWizardStepperRouteImport
+      parentRoute: typeof appLayoutWizardRoute
+    }
   }
 }
+
+interface appLayoutWizardRouteChildren {
+  appLayoutWizardFocusRoute: typeof appLayoutWizardFocusRoute
+  appLayoutWizardPreviewRoute: typeof appLayoutWizardPreviewRoute
+  appLayoutWizardRailRoute: typeof appLayoutWizardRailRoute
+  appLayoutWizardStepperRoute: typeof appLayoutWizardStepperRoute
+  appLayoutWizardIndexRoute: typeof appLayoutWizardIndexRoute
+}
+
+const appLayoutWizardRouteChildren: appLayoutWizardRouteChildren = {
+  appLayoutWizardFocusRoute: appLayoutWizardFocusRoute,
+  appLayoutWizardPreviewRoute: appLayoutWizardPreviewRoute,
+  appLayoutWizardRailRoute: appLayoutWizardRailRoute,
+  appLayoutWizardStepperRoute: appLayoutWizardStepperRoute,
+  appLayoutWizardIndexRoute: appLayoutWizardIndexRoute,
+}
+
+const appLayoutWizardRouteWithChildren = appLayoutWizardRoute._addFileChildren(
+  appLayoutWizardRouteChildren,
+)
+
+interface appLayoutRouteRouteChildren {
+  appLayoutPageRoute: typeof appLayoutPageRoute
+  appLayoutWizardRoute: typeof appLayoutWizardRouteWithChildren
+}
+
+const appLayoutRouteRouteChildren: appLayoutRouteRouteChildren = {
+  appLayoutPageRoute: appLayoutPageRoute,
+  appLayoutWizardRoute: appLayoutWizardRouteWithChildren,
+}
+
+const appLayoutRouteRouteWithChildren = appLayoutRouteRoute._addFileChildren(
+  appLayoutRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -183,6 +363,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
   WorkspaceRoute: WorkspaceRoute,
+  appLayoutRouteRoute: appLayoutRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

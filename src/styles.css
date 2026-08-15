@@ -15,6 +15,7 @@ html,
 body,
 #app {
   min-height: 100%;
+  overscroll-behavior: none;
 }
 
 body {
@@ -168,6 +169,17 @@ body {
   .font-serif {
     font-family: var(--font-serif);
   }
+}
+
+.sidebar-harbor {
+  --sidebar: var(--harbor);
+  --sidebar-foreground: var(--harbor-foreground);
+  --sidebar-primary: var(--signal);
+  --sidebar-primary-foreground: var(--harbor);
+  --sidebar-accent: oklch(1 0 0 / 0.08);
+  --sidebar-accent-foreground: var(--harbor-foreground);
+  --sidebar-border: oklch(1 0 0 / 0.12);
+  --sidebar-ring: var(--signal);
 }
 
 @media (prefers-reduced-motion: reduce) {
