@@ -27,7 +27,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar'
 import { logout } from '@/lib/auth/session'
@@ -186,7 +185,6 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </div>
-      <SidebarRail />
     </Sidebar>
   )
 }
