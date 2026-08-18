@@ -6,7 +6,6 @@ import {
 } from '@tanstack/react-router'
 import { ChevronsUpDownIcon, LogOutIcon, PlusIcon } from 'lucide-react'
 
-import { isWizardPath } from '@/components/agreement-wizard/prototype-switcher'
 import { Logo } from '@/components/shared/logo'
 import { NAV_ITEMS, isPageSlug } from '@/components/shared/app-shell/nav'
 import { getShellUser, initials } from '@/components/shared/app-shell/user'
@@ -51,14 +50,17 @@ function NewAgreementButton() {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   })
+  const onCreateAgreement = pathname === '/create-agreement'
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton
           tooltip="New agreement"
-          isActive={isWizardPath(pathname)}
-          render={<Link to="/wizard" />}
+          disabled={onCreateAgreement}
+          render={
+            onCreateAgreement ? undefined : <Link to="/create-agreement" />
+          }
           className="justify-center bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90 hover:text-sidebar-primary-foreground"
         >
           <PlusIcon />

@@ -1,11 +1,7 @@
 import { Link, useParams, useRouterState } from '@tanstack/react-router'
 import { BellIcon } from 'lucide-react'
 
-import {
-  WizardPrototypeMenu,
-  isWizardPath,
-  wizardPrototypeFromPath,
-} from '@/components/agreement-wizard/prototype-switcher'
+import { useAgreementDraftContext } from '@/components/agreement-wizard/use-agreement-draft'
 import { isPageSlug, pageLabel } from '@/components/shared/app-shell/nav'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -34,10 +30,13 @@ function AppBreadcrumb() {
     select: (state) => state.location.pathname,
   })
   const params = useParams({ strict: false })
+  const { agreements } = useAgreementDraftContext()
   const rawPage = params.page ?? 'agreements'
   const page = isPageSlug(rawPage) ? rawPage : 'agreements'
-  const wizard = wizardPrototypeFromPath(pathname)
-  const onWizard = isWizardPath(pathname)
+  const onCreateAgreement = pathname === '/create-agreement'
+  const agreementId =
+    typeof params.agreementId === 'string' ? params.agreementId : undefined
+  const agreement = agreementId ? agreements[agreementId] : undefined
 
   return (
     <Breadcrumb>
@@ -50,29 +49,27 @@ function AppBreadcrumb() {
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator className="hidden md:block" />
-        {onWizard ? (
+        {agreementId ? (
           <>
-            <BreadcrumbItem>
-              {wizard ? (
-                <BreadcrumbLink render={<Link to="/wizard" />}>
-                  New agreement
-                </BreadcrumbLink>
-              ) : (
-                <BreadcrumbPage>New agreement</BreadcrumbPage>
-              )}
+            <BreadcrumbItem className="hidden md:block">
+              <BreadcrumbLink
+                render={<Link to="/$page" params={{ page: 'agreements' }} />}
+              >
+                Agreements
+              </BreadcrumbLink>
             </BreadcrumbItem>
-            {wizard ? (
-              <>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{wizard.name}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </>
-            ) : null}
+            <BreadcrumbSeparator className="hidden md:block" />
+            <BreadcrumbItem>
+              <BreadcrumbPage>
+                {agreement?.draft.title || 'Agreement'}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
           </>
         ) : (
           <BreadcrumbItem>
-            <BreadcrumbPage>{pageLabel(page)}</BreadcrumbPage>
+            <BreadcrumbPage>
+              {onCreateAgreement ? 'New agreement' : pageLabel(page)}
+            </BreadcrumbPage>
           </BreadcrumbItem>
         )}
       </BreadcrumbList>
@@ -118,7 +115,6 @@ export function AppHeader() {
         />
         <AppBreadcrumb />
       </div>
-      <WizardPrototypeMenu />
       <NotificationBell />
     </header>
   )

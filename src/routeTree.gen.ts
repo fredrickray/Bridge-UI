@@ -18,12 +18,8 @@ import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
 import { Route as appLayoutRouteRouteImport } from './routes/(app)/_layout/route'
 import { Route as appLayoutPageRouteImport } from './routes/(app)/_layout/$page'
-import { Route as appLayoutWizardRouteImport } from './routes/(app)/_layout/wizard'
-import { Route as appLayoutWizardIndexRouteImport } from './routes/(app)/_layout/wizard/index'
-import { Route as appLayoutWizardFocusRouteImport } from './routes/(app)/_layout/wizard/focus'
-import { Route as appLayoutWizardPreviewRouteImport } from './routes/(app)/_layout/wizard/preview'
-import { Route as appLayoutWizardRailRouteImport } from './routes/(app)/_layout/wizard/rail'
-import { Route as appLayoutWizardStepperRouteImport } from './routes/(app)/_layout/wizard/stepper'
+import { Route as appLayoutCreateAgreementRouteImport } from './routes/(app)/_layout/create-agreement'
+import { Route as appLayoutAgreementsAgreementIdRouteImport } from './routes/(app)/_layout/agreements/$agreementId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -69,36 +65,18 @@ const appLayoutPageRoute = appLayoutPageRouteImport.update({
   path: '/$page',
   getParentRoute: () => appLayoutRouteRoute,
 } as any)
-const appLayoutWizardRoute = appLayoutWizardRouteImport.update({
-  id: '/wizard',
-  path: '/wizard',
-  getParentRoute: () => appLayoutRouteRoute,
-} as any)
-const appLayoutWizardIndexRoute = appLayoutWizardIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => appLayoutWizardRoute,
-} as any)
-const appLayoutWizardFocusRoute = appLayoutWizardFocusRouteImport.update({
-  id: '/focus',
-  path: '/focus',
-  getParentRoute: () => appLayoutWizardRoute,
-} as any)
-const appLayoutWizardPreviewRoute = appLayoutWizardPreviewRouteImport.update({
-  id: '/preview',
-  path: '/preview',
-  getParentRoute: () => appLayoutWizardRoute,
-} as any)
-const appLayoutWizardRailRoute = appLayoutWizardRailRouteImport.update({
-  id: '/rail',
-  path: '/rail',
-  getParentRoute: () => appLayoutWizardRoute,
-} as any)
-const appLayoutWizardStepperRoute = appLayoutWizardStepperRouteImport.update({
-  id: '/stepper',
-  path: '/stepper',
-  getParentRoute: () => appLayoutWizardRoute,
-} as any)
+const appLayoutCreateAgreementRoute =
+  appLayoutCreateAgreementRouteImport.update({
+    id: '/create-agreement',
+    path: '/create-agreement',
+    getParentRoute: () => appLayoutRouteRoute,
+  } as any)
+const appLayoutAgreementsAgreementIdRoute =
+  appLayoutAgreementsAgreementIdRouteImport.update({
+    id: '/agreements/$agreementId',
+    path: '/agreements/$agreementId',
+    getParentRoute: () => appLayoutRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -109,12 +87,8 @@ export interface FileRoutesByFullPath {
   '/verify': typeof VerifyRoute
   '/workspace': typeof WorkspaceRoute
   '/$page': typeof appLayoutPageRoute
-  '/wizard': typeof appLayoutWizardRouteWithChildren
-  '/wizard/focus': typeof appLayoutWizardFocusRoute
-  '/wizard/preview': typeof appLayoutWizardPreviewRoute
-  '/wizard/rail': typeof appLayoutWizardRailRoute
-  '/wizard/stepper': typeof appLayoutWizardStepperRoute
-  '/wizard/': typeof appLayoutWizardIndexRoute
+  '/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -125,11 +99,8 @@ export interface FileRoutesByTo {
   '/verify': typeof VerifyRoute
   '/workspace': typeof WorkspaceRoute
   '/$page': typeof appLayoutPageRoute
-  '/wizard/focus': typeof appLayoutWizardFocusRoute
-  '/wizard/preview': typeof appLayoutWizardPreviewRoute
-  '/wizard/rail': typeof appLayoutWizardRailRoute
-  '/wizard/stepper': typeof appLayoutWizardStepperRoute
-  '/wizard': typeof appLayoutWizardIndexRoute
+  '/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -142,12 +113,8 @@ export interface FileRoutesById {
   '/workspace': typeof WorkspaceRoute
   '/(app)/_layout': typeof appLayoutRouteRouteWithChildren
   '/(app)/_layout/$page': typeof appLayoutPageRoute
-  '/(app)/_layout/wizard': typeof appLayoutWizardRouteWithChildren
-  '/(app)/_layout/wizard/focus': typeof appLayoutWizardFocusRoute
-  '/(app)/_layout/wizard/preview': typeof appLayoutWizardPreviewRoute
-  '/(app)/_layout/wizard/rail': typeof appLayoutWizardRailRoute
-  '/(app)/_layout/wizard/stepper': typeof appLayoutWizardStepperRoute
-  '/(app)/_layout/wizard/': typeof appLayoutWizardIndexRoute
+  '/(app)/_layout/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/(app)/_layout/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -160,12 +127,8 @@ export interface FileRouteTypes {
     | '/verify'
     | '/workspace'
     | '/$page'
-    | '/wizard'
-    | '/wizard/focus'
-    | '/wizard/preview'
-    | '/wizard/rail'
-    | '/wizard/stepper'
-    | '/wizard/'
+    | '/create-agreement'
+    | '/agreements/$agreementId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -176,11 +139,8 @@ export interface FileRouteTypes {
     | '/verify'
     | '/workspace'
     | '/$page'
-    | '/wizard/focus'
-    | '/wizard/preview'
-    | '/wizard/rail'
-    | '/wizard/stepper'
-    | '/wizard'
+    | '/create-agreement'
+    | '/agreements/$agreementId'
   id:
     | '__root__'
     | '/'
@@ -192,12 +152,8 @@ export interface FileRouteTypes {
     | '/workspace'
     | '/(app)/_layout'
     | '/(app)/_layout/$page'
-    | '/(app)/_layout/wizard'
-    | '/(app)/_layout/wizard/focus'
-    | '/(app)/_layout/wizard/preview'
-    | '/(app)/_layout/wizard/rail'
-    | '/(app)/_layout/wizard/stepper'
-    | '/(app)/_layout/wizard/'
+    | '/(app)/_layout/create-agreement'
+    | '/(app)/_layout/agreements/$agreementId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -276,79 +232,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appLayoutPageRouteImport
       parentRoute: typeof appLayoutRouteRoute
     }
-    '/(app)/_layout/wizard': {
-      id: '/(app)/_layout/wizard'
-      path: '/wizard'
-      fullPath: '/wizard'
-      preLoaderRoute: typeof appLayoutWizardRouteImport
+    '/(app)/_layout/create-agreement': {
+      id: '/(app)/_layout/create-agreement'
+      path: '/create-agreement'
+      fullPath: '/create-agreement'
+      preLoaderRoute: typeof appLayoutCreateAgreementRouteImport
       parentRoute: typeof appLayoutRouteRoute
     }
-    '/(app)/_layout/wizard/': {
-      id: '/(app)/_layout/wizard/'
-      path: '/'
-      fullPath: '/wizard/'
-      preLoaderRoute: typeof appLayoutWizardIndexRouteImport
-      parentRoute: typeof appLayoutWizardRoute
-    }
-    '/(app)/_layout/wizard/focus': {
-      id: '/(app)/_layout/wizard/focus'
-      path: '/focus'
-      fullPath: '/wizard/focus'
-      preLoaderRoute: typeof appLayoutWizardFocusRouteImport
-      parentRoute: typeof appLayoutWizardRoute
-    }
-    '/(app)/_layout/wizard/preview': {
-      id: '/(app)/_layout/wizard/preview'
-      path: '/preview'
-      fullPath: '/wizard/preview'
-      preLoaderRoute: typeof appLayoutWizardPreviewRouteImport
-      parentRoute: typeof appLayoutWizardRoute
-    }
-    '/(app)/_layout/wizard/rail': {
-      id: '/(app)/_layout/wizard/rail'
-      path: '/rail'
-      fullPath: '/wizard/rail'
-      preLoaderRoute: typeof appLayoutWizardRailRouteImport
-      parentRoute: typeof appLayoutWizardRoute
-    }
-    '/(app)/_layout/wizard/stepper': {
-      id: '/(app)/_layout/wizard/stepper'
-      path: '/stepper'
-      fullPath: '/wizard/stepper'
-      preLoaderRoute: typeof appLayoutWizardStepperRouteImport
-      parentRoute: typeof appLayoutWizardRoute
+    '/(app)/_layout/agreements/$agreementId': {
+      id: '/(app)/_layout/agreements/$agreementId'
+      path: '/agreements/$agreementId'
+      fullPath: '/agreements/$agreementId'
+      preLoaderRoute: typeof appLayoutAgreementsAgreementIdRouteImport
+      parentRoute: typeof appLayoutRouteRoute
     }
   }
 }
 
-interface appLayoutWizardRouteChildren {
-  appLayoutWizardFocusRoute: typeof appLayoutWizardFocusRoute
-  appLayoutWizardPreviewRoute: typeof appLayoutWizardPreviewRoute
-  appLayoutWizardRailRoute: typeof appLayoutWizardRailRoute
-  appLayoutWizardStepperRoute: typeof appLayoutWizardStepperRoute
-  appLayoutWizardIndexRoute: typeof appLayoutWizardIndexRoute
-}
-
-const appLayoutWizardRouteChildren: appLayoutWizardRouteChildren = {
-  appLayoutWizardFocusRoute: appLayoutWizardFocusRoute,
-  appLayoutWizardPreviewRoute: appLayoutWizardPreviewRoute,
-  appLayoutWizardRailRoute: appLayoutWizardRailRoute,
-  appLayoutWizardStepperRoute: appLayoutWizardStepperRoute,
-  appLayoutWizardIndexRoute: appLayoutWizardIndexRoute,
-}
-
-const appLayoutWizardRouteWithChildren = appLayoutWizardRoute._addFileChildren(
-  appLayoutWizardRouteChildren,
-)
-
 interface appLayoutRouteRouteChildren {
   appLayoutPageRoute: typeof appLayoutPageRoute
-  appLayoutWizardRoute: typeof appLayoutWizardRouteWithChildren
+  appLayoutCreateAgreementRoute: typeof appLayoutCreateAgreementRoute
+  appLayoutAgreementsAgreementIdRoute: typeof appLayoutAgreementsAgreementIdRoute
 }
 
 const appLayoutRouteRouteChildren: appLayoutRouteRouteChildren = {
   appLayoutPageRoute: appLayoutPageRoute,
-  appLayoutWizardRoute: appLayoutWizardRouteWithChildren,
+  appLayoutCreateAgreementRoute: appLayoutCreateAgreementRoute,
+  appLayoutAgreementsAgreementIdRoute: appLayoutAgreementsAgreementIdRoute,
 }
 
 const appLayoutRouteRouteWithChildren = appLayoutRouteRoute._addFileChildren(

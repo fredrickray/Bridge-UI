@@ -1,9 +1,9 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
-@import "@fontsource-variable/space-grotesk";
-@import "@fontsource-variable/source-serif-4";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/source-serif-4';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -23,9 +23,10 @@ body {
 }
 
 @theme inline {
-  --font-heading: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Source Serif 4 Variable", ui-serif, Georgia, serif;
-  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading:
+    'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -61,6 +62,8 @@ body {
   --color-harbor-foreground: var(--harbor-foreground);
   --color-signal: var(--signal);
   --color-held: var(--held);
+  --color-wizard-rail: var(--wizard-rail);
+  --color-wizard-rail-foreground: var(--wizard-rail-foreground);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -110,6 +113,9 @@ body {
   --harbor-foreground: oklch(0.96 0.01 180);
   --signal: oklch(0.72 0.12 170);
   --held: oklch(0.72 0.12 85);
+  /* Wizard step rail — not harbor, so it reads as a second surface */
+  --wizard-rail: oklch(0.93 0.02 195);
+  --wizard-rail-foreground: oklch(0.24 0.03 220);
 }
 
 .dark {
@@ -148,6 +154,8 @@ body {
   --harbor-foreground: oklch(0.96 0.01 180);
   --signal: oklch(0.72 0.12 170);
   --held: oklch(0.75 0.12 85);
+  --wizard-rail: oklch(0.26 0.03 200);
+  --wizard-rail-foreground: oklch(0.96 0.01 180);
 }
 
 @layer base {
