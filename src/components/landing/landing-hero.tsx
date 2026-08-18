@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router'
 import { ArrowRightIcon } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 
@@ -45,21 +44,19 @@ export function LandingHero() {
           <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 pt-1">
             <Button
               size="lg"
+              href="/signup"
               className="h-11 bg-signal px-5 text-harbor hover:bg-signal/90 active:scale-[0.97]"
-              asChild
             >
-              <Link to="/signup">
-                Start escrow
-                <ArrowRightIcon data-icon="inline-end" />
-              </Link>
+              Start escrow
+              <ArrowRightIcon data-icon="inline-end" />
             </Button>
             <Button
               size="lg"
               variant="outline"
+              href="/login"
               className="h-11 border-white/20 bg-transparent px-5 text-harbor-foreground hover:bg-white/10 hover:text-harbor-foreground active:scale-[0.97]"
-              asChild
             >
-              <Link to="/login">Sign in</Link>
+              Sign in
             </Button>
           </motion.div>
         </motion.div>

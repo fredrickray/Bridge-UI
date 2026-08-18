@@ -1,8 +1,9 @@
-import { Link } from '@tanstack/react-router'
 import { motion, useReducedMotion } from 'motion/react'
 import type { ReactNode } from 'react'
 
 import { AuthBrandPanel } from '@/components/auth/auth-brand-panel'
+import { Logo } from '@/components/shared/logo'
+import { Button } from '@/components/ui/button'
 
 type AuthLayoutProps = {
   title: string
@@ -21,13 +22,10 @@ export function AuthLayout({ title, description, children, footer }: AuthLayoutP
       </aside>
 
       <main className="relative flex flex-col justify-center px-5 py-10 sm:px-8 md:px-12">
-        <div className="mb-8 flex items-center gap-2 lg:hidden">
-          <span className="flex size-8 items-center justify-center rounded-lg bg-primary/15">
-            <span className="size-2 rounded-full bg-primary" />
-          </span>
-          <Link to="/login" className="font-serif text-xl text-foreground">
-            Bridge
-          </Link>
+        <div className="mb-8 lg:hidden">
+          <Button href="/login" variant="ghost" className="h-auto px-0 hover:bg-transparent">
+            <Logo />
+          </Button>
         </div>
 
         <motion.div

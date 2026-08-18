@@ -18,7 +18,8 @@ import {
   FieldSeparator,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { signupSchema, type SignupValues } from '@/lib/auth/schemas'
+import { signupSchema  } from '@/lib/auth/schemas'
+import type {SignupValues} from '@/lib/auth/schemas';
 import { signupWithEmail } from '@/lib/auth/session'
 
 export const Route = createFileRoute('/signup')({

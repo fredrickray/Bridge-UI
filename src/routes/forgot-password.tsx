@@ -9,7 +9,8 @@ import { AuthLayout } from '@/components/auth/auth-layout'
 import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { forgotPasswordSchema, type ForgotPasswordValues } from '@/lib/auth/schemas'
+import { forgotPasswordSchema  } from '@/lib/auth/schemas'
+import type {ForgotPasswordValues} from '@/lib/auth/schemas';
 import { requestPasswordReset } from '@/lib/auth/session'
 
 export const Route = createFileRoute('/forgot-password')({

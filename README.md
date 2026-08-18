@@ -6,7 +6,7 @@ Escrow-as-a-service frontend built with React, TanStack Router, Tailwind CSS v4,
 
 - React 19 + Vite 8
 - TanStack Router (file-based)
-- Tailwind CSS v4 + shadcn (radix-nova)
+- Tailwind CSS v4 + shadcn (base-nova)
 - React Hook Form + Zod
 - Motion (auth panel micro-interactions)
 

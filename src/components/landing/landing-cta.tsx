@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router'
 import { ArrowRightIcon } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 
@@ -30,23 +29,17 @@ export function LandingCta() {
           Create an account, invite the other party, and fund when both sides agree.
         </motion.p>
         <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-3">
-          <Button
-            size="lg"
-            className="h-11 px-5 active:scale-[0.97]"
-            asChild
-          >
-            <Link to="/signup">
-              Create account
-              <ArrowRightIcon data-icon="inline-end" />
-            </Link>
+          <Button size="lg" href="/signup" className="h-11 px-5 active:scale-[0.97]">
+            Create account
+            <ArrowRightIcon data-icon="inline-end" />
           </Button>
           <Button
             size="lg"
             variant="outline"
+            href="/login"
             className="h-11 px-5 active:scale-[0.97]"
-            asChild
           >
-            <Link to="/login">Sign in</Link>
+            Sign in
           </Button>
         </motion.div>
       </motion.div>

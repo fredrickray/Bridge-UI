@@ -1,5 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react'
 
+import { Logo } from '@/components/shared/logo'
+
 const steps = [
   { label: 'Fund', detail: 'Payer deposits into escrow' },
   { label: 'Deliver', detail: 'Provider completes the milestone' },
@@ -34,12 +36,7 @@ export function AuthBrandPanel() {
       />
 
       <div className="relative z-10 flex flex-1 flex-col justify-between p-8 md:p-10 lg:p-12">
-        <div className="flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-signal/20 ring-1 ring-signal/40">
-            <span className="size-2.5 rounded-full bg-signal shadow-[0_0_12px_oklch(0.72_0.12_170)]" />
-          </span>
-          <span className="font-serif text-2xl tracking-tight">Bridge</span>
-        </div>
+        <Logo className="text-harbor-foreground" />
 
         <div className="flex max-w-md flex-col gap-8 py-10">
           <div className="flex flex-col gap-3">
