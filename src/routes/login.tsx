@@ -17,7 +17,8 @@ import {
   FieldSeparator,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { loginSchema, type LoginValues } from '@/lib/auth/schemas'
+import { loginSchema  } from '@/lib/auth/schemas'
+import type {LoginValues} from '@/lib/auth/schemas';
 import { loginWithEmail } from '@/lib/auth/session'
 
 export const Route = createFileRoute('/login')({
@@ -37,7 +38,7 @@ function LoginPage() {
     try {
       await loginWithEmail(values.email, values.password)
       toast.success('Welcome back')
-      await navigate({ to: '/workspace' })
+      await navigate({ to: '/$page', params: { page: 'agreements' } })
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Unable to sign in')
     } finally {

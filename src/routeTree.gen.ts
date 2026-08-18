@@ -16,6 +16,10 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
+import { Route as appLayoutRouteRouteImport } from './routes/(app)/_layout/route'
+import { Route as appLayoutPageRouteImport } from './routes/(app)/_layout/$page'
+import { Route as appLayoutCreateAgreementRouteImport } from './routes/(app)/_layout/create-agreement'
+import { Route as appLayoutAgreementsAgreementIdRouteImport } from './routes/(app)/_layout/agreements/$agreementId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +56,27 @@ const WorkspaceRoute = WorkspaceRouteImport.update({
   path: '/workspace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appLayoutRouteRoute = appLayoutRouteRouteImport.update({
+  id: '/(app)/_layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appLayoutPageRoute = appLayoutPageRouteImport.update({
+  id: '/$page',
+  path: '/$page',
+  getParentRoute: () => appLayoutRouteRoute,
+} as any)
+const appLayoutCreateAgreementRoute =
+  appLayoutCreateAgreementRouteImport.update({
+    id: '/create-agreement',
+    path: '/create-agreement',
+    getParentRoute: () => appLayoutRouteRoute,
+  } as any)
+const appLayoutAgreementsAgreementIdRoute =
+  appLayoutAgreementsAgreementIdRouteImport.update({
+    id: '/agreements/$agreementId',
+    path: '/agreements/$agreementId',
+    getParentRoute: () => appLayoutRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +86,9 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/workspace': typeof WorkspaceRoute
+  '/$page': typeof appLayoutPageRoute
+  '/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +98,9 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/workspace': typeof WorkspaceRoute
+  '/$page': typeof appLayoutPageRoute
+  '/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +111,10 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
   '/workspace': typeof WorkspaceRoute
+  '/(app)/_layout': typeof appLayoutRouteRouteWithChildren
+  '/(app)/_layout/$page': typeof appLayoutPageRoute
+  '/(app)/_layout/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/(app)/_layout/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +126,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/workspace'
+    | '/$page'
+    | '/create-agreement'
+    | '/agreements/$agreementId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +138,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/workspace'
+    | '/$page'
+    | '/create-agreement'
+    | '/agreements/$agreementId'
   id:
     | '__root__'
     | '/'
@@ -109,6 +150,10 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify'
     | '/workspace'
+    | '/(app)/_layout'
+    | '/(app)/_layout/$page'
+    | '/(app)/_layout/create-agreement'
+    | '/(app)/_layout/agreements/$agreementId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +164,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
   WorkspaceRoute: typeof WorkspaceRoute
+  appLayoutRouteRoute: typeof appLayoutRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -172,8 +218,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkspaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/_layout': {
+      id: '/(app)/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appLayoutRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/_layout/$page': {
+      id: '/(app)/_layout/$page'
+      path: '/$page'
+      fullPath: '/$page'
+      preLoaderRoute: typeof appLayoutPageRouteImport
+      parentRoute: typeof appLayoutRouteRoute
+    }
+    '/(app)/_layout/create-agreement': {
+      id: '/(app)/_layout/create-agreement'
+      path: '/create-agreement'
+      fullPath: '/create-agreement'
+      preLoaderRoute: typeof appLayoutCreateAgreementRouteImport
+      parentRoute: typeof appLayoutRouteRoute
+    }
+    '/(app)/_layout/agreements/$agreementId': {
+      id: '/(app)/_layout/agreements/$agreementId'
+      path: '/agreements/$agreementId'
+      fullPath: '/agreements/$agreementId'
+      preLoaderRoute: typeof appLayoutAgreementsAgreementIdRouteImport
+      parentRoute: typeof appLayoutRouteRoute
+    }
   }
 }
+
+interface appLayoutRouteRouteChildren {
+  appLayoutPageRoute: typeof appLayoutPageRoute
+  appLayoutCreateAgreementRoute: typeof appLayoutCreateAgreementRoute
+  appLayoutAgreementsAgreementIdRoute: typeof appLayoutAgreementsAgreementIdRoute
+}
+
+const appLayoutRouteRouteChildren: appLayoutRouteRouteChildren = {
+  appLayoutPageRoute: appLayoutPageRoute,
+  appLayoutCreateAgreementRoute: appLayoutCreateAgreementRoute,
+  appLayoutAgreementsAgreementIdRoute: appLayoutAgreementsAgreementIdRoute,
+}
+
+const appLayoutRouteRouteWithChildren = appLayoutRouteRoute._addFileChildren(
+  appLayoutRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -183,6 +273,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
   WorkspaceRoute: WorkspaceRoute,
+  appLayoutRouteRoute: appLayoutRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -14,7 +14,8 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from '@/components/ui/input-otp'
-import { verifySchema, type VerifyValues } from '@/lib/auth/schemas'
+import { verifySchema  } from '@/lib/auth/schemas'
+import type {VerifyValues} from '@/lib/auth/schemas';
 import { getPendingVerification, verifyEmailCode } from '@/lib/auth/session'
 
 const searchSchema = z.object({
@@ -43,7 +44,7 @@ function VerifyPage() {
     try {
       await verifyEmailCode(values.code)
       toast.success('Email verified')
-      await navigate({ to: '/workspace' })
+      await navigate({ to: '/$page', params: { page: 'agreements' } })
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Verification failed')
     } finally {

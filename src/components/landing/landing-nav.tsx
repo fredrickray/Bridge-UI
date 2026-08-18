@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { motion, useMotionValueEvent, useScroll, useReducedMotion } from 'motion/react'
 import { useState } from 'react'
 
+import { Logo } from '@/components/shared/logo'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -27,28 +28,25 @@ export function LandingNav() {
       transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
-        <Link to="/" className="flex items-center gap-2.5 text-harbor-foreground">
-          <span className="flex size-8 items-center justify-center rounded-lg bg-signal/20 ring-1 ring-signal/35">
-            <span className="size-2 rounded-full bg-signal" />
-          </span>
-          <span className="font-serif text-xl tracking-tight">Bridge</span>
+        <Link to="/" className="text-harbor-foreground">
+          <Logo />
         </Link>
 
         <nav className="flex items-center gap-2 sm:gap-3">
           <Button
             variant="ghost"
             size="sm"
+            href="/login"
             className="text-harbor-foreground/80 hover:bg-white/10 hover:text-harbor-foreground"
-            asChild
           >
-            <Link to="/login">Sign in</Link>
+            Sign in
           </Button>
           <Button
             size="sm"
+            href="/signup"
             className="bg-signal text-harbor hover:bg-signal/90"
-            asChild
           >
-            <Link to="/signup">Get started</Link>
+            Get started
           </Button>
         </nav>
       </div>
