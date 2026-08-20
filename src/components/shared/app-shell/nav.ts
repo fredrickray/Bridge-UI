@@ -21,7 +21,7 @@ export const NAV_ITEMS = [
   { slug: 'parties', label: 'Parties', icon: UsersIcon },
   { slug: 'milestones', label: 'Milestones', icon: FlagIcon },
   { slug: 'releases', label: 'Releases', icon: UnlockIcon },
-  { slug: 'settings', label: 'Settings', icon: SettingsIcon },
+  { slug: 'settings', label: 'Profile', icon: SettingsIcon },
 ] as const
 
 export function isPageSlug(value: string): value is PageSlug {
@@ -58,7 +58,7 @@ export const PAGE_INTRO: Record<
     description: 'Funds unlocked after inspection.',
   },
   settings: {
-    title: 'Settings',
-    description: 'Workspace preferences. Not wired yet.',
+    title: 'Profile & account',
+    description: 'Manage your profile, sign-in details, and notification preferences.',
   },
 }

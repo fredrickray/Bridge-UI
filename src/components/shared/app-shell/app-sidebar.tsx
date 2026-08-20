@@ -4,11 +4,16 @@ import {
   useParams,
   useRouterState,
 } from '@tanstack/react-router'
-import { ChevronsUpDownIcon, LogOutIcon, PlusIcon } from 'lucide-react'
+import {
+  ChevronsUpDownIcon,
+  LogOutIcon,
+  PlusIcon,
+  UserRoundIcon,
+} from 'lucide-react'
 
 import { Logo } from '@/components/shared/logo'
 import { NAV_ITEMS, isPageSlug } from '@/components/shared/app-shell/nav'
-import { getShellUser, initials } from '@/components/shared/app-shell/user'
+import { initials, useShellUser } from '@/components/shared/app-shell/user'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -96,7 +101,7 @@ function NavLinks() {
 function ProfileMenu() {
   const { isMobile } = useSidebar()
   const navigate = useNavigate()
-  const user = getShellUser()
+  const user = useShellUser()
 
   function handleLogout() {
     logout()
@@ -150,7 +155,18 @@ function ProfileMenu() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={handleLogout} variant='destructive'>
+              <DropdownMenuItem
+                onClick={() =>
+                  void navigate({ to: '/$page', params: { page: 'settings' } })
+                }
+              >
+                <UserRoundIcon />
+                Profile & account
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem onClick={handleLogout} variant="destructive">
                 <LogOutIcon />
                 Sign out
               </DropdownMenuItem>
