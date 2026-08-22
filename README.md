@@ -20,7 +20,11 @@ Escrow-as-a-service frontend built with React, TanStack Router, Tailwind CSS v4,
 | `/verify` | Email verification OTP |
 | `/forgot-password` | Request password reset |
 | `/reset-password` | Set a new password |
-| `/workspace` | Authenticated placeholder |
+| `/overview` | Signed-in dashboard |
+| `/agreements` | Agreement list |
+| `/agreements/$agreementId` | Agreement detail |
+| `/create-agreement` | New agreement wizard |
+| `/settings` | Workspace settings |
 
 Auth is currently mocked in `src/lib/auth/session.ts` (localStorage). Wire these helpers to the NestJS API when ready.
 

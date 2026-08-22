@@ -12,7 +12,7 @@ export const Route = createFileRoute('/')({
   beforeLoad: () => {
     const { token } = getAuthState()
     if (token) {
-      throw redirect({ to: '/$page', params: { page: 'agreements' } })
+      throw redirect({ to: '/overview' })
     }
   },
   component: LandingPage,

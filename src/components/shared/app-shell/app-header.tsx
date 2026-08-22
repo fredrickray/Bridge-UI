@@ -2,7 +2,7 @@ import { Link, useParams, useRouterState } from '@tanstack/react-router'
 import { BellIcon } from 'lucide-react'
 
 import { useAgreementDraftContext } from '@/components/agreement-wizard/use-agreement-draft'
-import { isPageSlug, pageLabel } from '@/components/shared/app-shell/nav'
+import { navLabelForPath } from '@/components/shared/app-shell/nav'
 import { Badge } from '@/components/ui/badge'
 import {
   Breadcrumb,
@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
+import { getCatalogAgreement } from '@/lib/agreement/catalog'
 
 function AppBreadcrumb() {
   const pathname = useRouterState({
@@ -31,45 +32,34 @@ function AppBreadcrumb() {
   })
   const params = useParams({ strict: false })
   const { agreements } = useAgreementDraftContext()
-  const rawPage = params.page ?? 'agreements'
-  const page = isPageSlug(rawPage) ? rawPage : 'agreements'
-  const onCreateAgreement = pathname === '/create-agreement'
   const agreementId =
     typeof params.agreementId === 'string' ? params.agreementId : undefined
-  const agreement = agreementId ? agreements[agreementId] : undefined
+  const created =
+    agreementId && agreementId in agreements
+      ? agreements[agreementId]
+      : undefined
+  const catalog = agreementId ? getCatalogAgreement(agreementId) : undefined
+  const agreementTitle = created?.draft.title || catalog?.name || 'Agreement'
+  const currentLabel = navLabelForPath(pathname)
 
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        <BreadcrumbItem className="hidden md:block">
-          <BreadcrumbLink
-            render={<Link to="/$page" params={{ page: 'agreements' }} />}
-          >
-            Bridge
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator className="hidden md:block" />
         {agreementId ? (
           <>
             <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink
-                render={<Link to="/$page" params={{ page: 'agreements' }} />}
-              >
+              <BreadcrumbLink render={<Link to="/agreements" />}>
                 Agreements
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>
-              <BreadcrumbPage>
-                {agreement?.draft.title || 'Agreement'}
-              </BreadcrumbPage>
+              <BreadcrumbPage>{agreementTitle}</BreadcrumbPage>
             </BreadcrumbItem>
           </>
         ) : (
           <BreadcrumbItem>
-            <BreadcrumbPage>
-              {onCreateAgreement ? 'New agreement' : pageLabel(page)}
-            </BreadcrumbPage>
+            <BreadcrumbPage>{currentLabel}</BreadcrumbPage>
           </BreadcrumbItem>
         )}
       </BreadcrumbList>

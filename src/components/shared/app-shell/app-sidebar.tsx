@@ -1,13 +1,8 @@
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useRouterState,
-} from '@tanstack/react-router'
+import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import { ChevronsUpDownIcon, LogOutIcon, PlusIcon } from 'lucide-react'
 
 import { Logo } from '@/components/shared/logo'
-import { NAV_ITEMS, isPageSlug } from '@/components/shared/app-shell/nav'
+import { isNavPathActive, NAV_ITEMS } from '@/components/shared/app-shell/nav'
 import { getShellUser, initials } from '@/components/shared/app-shell/user'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
@@ -36,7 +31,7 @@ function SidebarBrand() {
       <SidebarMenuItem>
         <SidebarMenuButton
           size="lg"
-          render={<Link to="/$page" params={{ page: 'agreements' }} />}
+          render={<Link to="/overview" />}
           tooltip="Bridge"
         >
           <Logo />
@@ -64,7 +59,9 @@ function NewAgreementButton() {
           className="justify-center bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90 hover:text-sidebar-primary-foreground"
         >
           <PlusIcon />
-          <span>New agreement</span>
+          <span className="group-data-[collapsible=icon]:hidden">
+            New agreement
+          </span>
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
@@ -72,16 +69,17 @@ function NewAgreementButton() {
 }
 
 function NavLinks() {
-  const params = useParams({ strict: false })
-  const current = isPageSlug(params.page ?? '') ? params.page : 'agreements'
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  })
 
   return (
     <SidebarMenu className="gap-2">
       {NAV_ITEMS.map((item) => (
-        <SidebarMenuItem key={item.slug}>
+        <SidebarMenuItem key={item.to}>
           <SidebarMenuButton
-            render={<Link to="/$page" params={{ page: item.slug }} />}
-            isActive={current === item.slug}
+            render={<Link to={item.to} />}
+            isActive={isNavPathActive(item.to, pathname)}
             tooltip={item.label}
           >
             <item.icon />
@@ -150,7 +148,7 @@ function ProfileMenu() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={handleLogout} variant='destructive'>
+              <DropdownMenuItem onClick={handleLogout} variant="destructive">
                 <LogOutIcon />
                 Sign out
               </DropdownMenuItem>

@@ -38,7 +38,7 @@ function LoginPage() {
     try {
       await loginWithEmail(values.email, values.password)
       toast.success('Welcome back')
-      await navigate({ to: '/$page', params: { page: 'agreements' } })
+      await navigate({ to: '/overview' })
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Unable to sign in')
     } finally {

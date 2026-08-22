@@ -15,10 +15,11 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyRouteImport } from './routes/verify'
-import { Route as WorkspaceRouteImport } from './routes/workspace'
 import { Route as appLayoutRouteRouteImport } from './routes/(app)/_layout/route'
-import { Route as appLayoutPageRouteImport } from './routes/(app)/_layout/$page'
 import { Route as appLayoutCreateAgreementRouteImport } from './routes/(app)/_layout/create-agreement'
+import { Route as appLayoutOverviewRouteImport } from './routes/(app)/_layout/overview'
+import { Route as appLayoutSettingsRouteImport } from './routes/(app)/_layout/settings'
+import { Route as appLayoutAgreementsIndexRouteImport } from './routes/(app)/_layout/agreements/index'
 import { Route as appLayoutAgreementsAgreementIdRouteImport } from './routes/(app)/_layout/agreements/$agreementId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -51,24 +52,30 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WorkspaceRoute = WorkspaceRouteImport.update({
-  id: '/workspace',
-  path: '/workspace',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const appLayoutRouteRoute = appLayoutRouteRouteImport.update({
   id: '/(app)/_layout',
   getParentRoute: () => rootRouteImport,
-} as any)
-const appLayoutPageRoute = appLayoutPageRouteImport.update({
-  id: '/$page',
-  path: '/$page',
-  getParentRoute: () => appLayoutRouteRoute,
 } as any)
 const appLayoutCreateAgreementRoute =
   appLayoutCreateAgreementRouteImport.update({
     id: '/create-agreement',
     path: '/create-agreement',
+    getParentRoute: () => appLayoutRouteRoute,
+  } as any)
+const appLayoutOverviewRoute = appLayoutOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => appLayoutRouteRoute,
+} as any)
+const appLayoutSettingsRoute = appLayoutSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => appLayoutRouteRoute,
+} as any)
+const appLayoutAgreementsIndexRoute =
+  appLayoutAgreementsIndexRouteImport.update({
+    id: '/agreements/',
+    path: '/agreements/',
     getParentRoute: () => appLayoutRouteRoute,
   } as any)
 const appLayoutAgreementsAgreementIdRoute =
@@ -85,10 +92,11 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
-  '/workspace': typeof WorkspaceRoute
-  '/$page': typeof appLayoutPageRoute
   '/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/overview': typeof appLayoutOverviewRoute
+  '/settings': typeof appLayoutSettingsRoute
   '/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
+  '/agreements/': typeof appLayoutAgreementsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -97,10 +105,11 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
-  '/workspace': typeof WorkspaceRoute
-  '/$page': typeof appLayoutPageRoute
   '/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/overview': typeof appLayoutOverviewRoute
+  '/settings': typeof appLayoutSettingsRoute
   '/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
+  '/agreements': typeof appLayoutAgreementsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -110,11 +119,12 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/verify': typeof VerifyRoute
-  '/workspace': typeof WorkspaceRoute
   '/(app)/_layout': typeof appLayoutRouteRouteWithChildren
-  '/(app)/_layout/$page': typeof appLayoutPageRoute
   '/(app)/_layout/create-agreement': typeof appLayoutCreateAgreementRoute
+  '/(app)/_layout/overview': typeof appLayoutOverviewRoute
+  '/(app)/_layout/settings': typeof appLayoutSettingsRoute
   '/(app)/_layout/agreements/$agreementId': typeof appLayoutAgreementsAgreementIdRoute
+  '/(app)/_layout/agreements/': typeof appLayoutAgreementsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -125,10 +135,11 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify'
-    | '/workspace'
-    | '/$page'
     | '/create-agreement'
+    | '/overview'
+    | '/settings'
     | '/agreements/$agreementId'
+    | '/agreements/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -137,10 +148,11 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify'
-    | '/workspace'
-    | '/$page'
     | '/create-agreement'
+    | '/overview'
+    | '/settings'
     | '/agreements/$agreementId'
+    | '/agreements'
   id:
     | '__root__'
     | '/'
@@ -149,11 +161,12 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify'
-    | '/workspace'
     | '/(app)/_layout'
-    | '/(app)/_layout/$page'
     | '/(app)/_layout/create-agreement'
+    | '/(app)/_layout/overview'
+    | '/(app)/_layout/settings'
     | '/(app)/_layout/agreements/$agreementId'
+    | '/(app)/_layout/agreements/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -163,7 +176,6 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
   VerifyRoute: typeof VerifyRoute
-  WorkspaceRoute: typeof WorkspaceRoute
   appLayoutRouteRoute: typeof appLayoutRouteRouteWithChildren
 }
 
@@ -211,13 +223,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/workspace': {
-      id: '/workspace'
-      path: '/workspace'
-      fullPath: '/workspace'
-      preLoaderRoute: typeof WorkspaceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/(app)/_layout': {
       id: '/(app)/_layout'
       path: ''
@@ -225,18 +230,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appLayoutRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(app)/_layout/$page': {
-      id: '/(app)/_layout/$page'
-      path: '/$page'
-      fullPath: '/$page'
-      preLoaderRoute: typeof appLayoutPageRouteImport
-      parentRoute: typeof appLayoutRouteRoute
-    }
     '/(app)/_layout/create-agreement': {
       id: '/(app)/_layout/create-agreement'
       path: '/create-agreement'
       fullPath: '/create-agreement'
       preLoaderRoute: typeof appLayoutCreateAgreementRouteImport
+      parentRoute: typeof appLayoutRouteRoute
+    }
+    '/(app)/_layout/overview': {
+      id: '/(app)/_layout/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof appLayoutOverviewRouteImport
+      parentRoute: typeof appLayoutRouteRoute
+    }
+    '/(app)/_layout/settings': {
+      id: '/(app)/_layout/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof appLayoutSettingsRouteImport
+      parentRoute: typeof appLayoutRouteRoute
+    }
+    '/(app)/_layout/agreements/': {
+      id: '/(app)/_layout/agreements/'
+      path: '/agreements'
+      fullPath: '/agreements/'
+      preLoaderRoute: typeof appLayoutAgreementsIndexRouteImport
       parentRoute: typeof appLayoutRouteRoute
     }
     '/(app)/_layout/agreements/$agreementId': {
@@ -250,15 +269,19 @@ declare module '@tanstack/react-router' {
 }
 
 interface appLayoutRouteRouteChildren {
-  appLayoutPageRoute: typeof appLayoutPageRoute
   appLayoutCreateAgreementRoute: typeof appLayoutCreateAgreementRoute
+  appLayoutOverviewRoute: typeof appLayoutOverviewRoute
+  appLayoutSettingsRoute: typeof appLayoutSettingsRoute
   appLayoutAgreementsAgreementIdRoute: typeof appLayoutAgreementsAgreementIdRoute
+  appLayoutAgreementsIndexRoute: typeof appLayoutAgreementsIndexRoute
 }
 
 const appLayoutRouteRouteChildren: appLayoutRouteRouteChildren = {
-  appLayoutPageRoute: appLayoutPageRoute,
   appLayoutCreateAgreementRoute: appLayoutCreateAgreementRoute,
+  appLayoutOverviewRoute: appLayoutOverviewRoute,
+  appLayoutSettingsRoute: appLayoutSettingsRoute,
   appLayoutAgreementsAgreementIdRoute: appLayoutAgreementsAgreementIdRoute,
+  appLayoutAgreementsIndexRoute: appLayoutAgreementsIndexRoute,
 }
 
 const appLayoutRouteRouteWithChildren = appLayoutRouteRoute._addFileChildren(
@@ -272,7 +295,6 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
   VerifyRoute: VerifyRoute,
-  WorkspaceRoute: WorkspaceRoute,
   appLayoutRouteRoute: appLayoutRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport

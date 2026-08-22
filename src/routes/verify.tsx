@@ -44,7 +44,7 @@ function VerifyPage() {
     try {
       await verifyEmailCode(values.code)
       toast.success('Email verified')
-      await navigate({ to: '/$page', params: { page: 'agreements' } })
+      await navigate({ to: '/overview' })
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Verification failed')
     } finally {

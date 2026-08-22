@@ -1,5 +1,9 @@
 import { getAuthState } from '@/lib/auth/session'
-import { DEMO_USER } from '@/components/shared/app-shell/nav'
+
+const DEMO_USER = {
+  name: 'Ada Okonkwo',
+  email: 'ada@bridge.escrow',
+}
 
 export function getShellUser() {
   const { user } = getAuthState()
